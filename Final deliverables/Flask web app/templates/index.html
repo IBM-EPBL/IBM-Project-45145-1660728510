@@ -1,0 +1,185 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Forest Fire Detection</title>
+    <link href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet"> 
+	<style>
+	
+	.bg-dark {
+		background-color: 	#129ded!important;
+	}
+	#result {
+		color: #05216dd1;
+	}
+	body
+{
+    background-image: url("data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgKCgkLDRYPDQwMDRsUFRAWIB0iIiAdHx8kKDQsJCYxJx8fLT0tMTU3Ojo6Iys/RD84QzQ5OjcBCgoKDQwNGg8PGjclHyU3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3N//AABEIAHkA1wMBIgACEQEDEQH/xAAbAAEAAwEBAQEAAAAAAAAAAAAAAQIDBAUGB//EAC0QAAIBAwMDAgYCAwEAAAAAAAABAgMRIQQSMUFRYRMiBTJxgZGhQlIjM7EU/8QAGAEBAQEBAQAAAAAAAAAAAAAAAAMBAgT/xAAcEQEBAQEAAwEBAAAAAAAAAAAAARECAxIxQSL/2gAMAwEAAhEDEQA/AP1ZK7NCEiQKszcrP6mjMK3AGrNXp4zounLmXV9DDQz9W+7mH7O4yzYR4U6DUmmsrkvSpKn7ny+PB6OqpL57eGcslYjx4862q9d7MIO6NqUbu/bg46c3Gso/2dj0YraXSSWSuyGaQVkBYh4RJWXYDNvJPJEhTdwLoMlkXAggAAAAAAAAAAAAMossQ6c1x/0UmqsN0Gmsp2fVcgQzCqm1ZcnS6cuxWNGW67X7ArQSoqKX3OxZV1wczpT7fsvTk6atPHYDWSvFpnn1o7JNM7nVh3MK8FWtsV2Bx04e7f8Ag7KUtyt1M/8Az1V/H9kxpVoST24+oG1y9OXQybI3NZQHUVkQqkWr3+w3ICkiYqxKzkWAm5AAEAAAAAAAAAAAAAOf4pqXp9M1D/ZPEfHk834JXenrejNvZVeL9JG2vUp6iW9cYSOOVJ8rDXU8nfd91+eP5fSMkx0k51NNTlVxNrPnybHql2ahmIfBy1ZZudFR4OaqaJi90bo3oxtG75Zx6RuVZwfy8noACrLlGBhJZKSwi9Uzd2wJpytKz6myWTmZ1UPku+WBfghkkMCCCWQAAAAAAAAAAAAAAZ6qkp+63uRzUtOqlRXXtXP0PQkRSh6cbdyXXjl613O8mLcEkMzdVJ2sVcNJK6OSpjk2dZdmQo+rJvi3cDKnDbHydVOW6N/synpPuvwIxcJXurdgNij4I9TwQ54AznllJLqaWuNoGUY7n4N44IjGyJsBcqLgCAAAAAAAAAAAAAAAAaEmGi1MNXp41YKz4a7M3E+GYrN2iclSTWToqnLW4A0h77bevB1RjtSS6HH8Pur7+G/adoApMuUkBmnmxE2Vae/AYEwlmz+xpYwd28cnQgABDYAAAAAAAAAAAAAAAAAAAeH8HrvS6jZJ/wCOphrs+jPof0fN+k+x61HUT2KLackrO5DwW5ivkn665q6OScd0rF3qJv8Ar+Dn0ushqNTUpS5Xytde5a2T6nJa6V7cLhcHTB7oqRlsXQzdR0pJRynzc1jrM5mfrSt0JpuU37uACVis0bbIlXFWAzhGzbLkpACAAAAAAAAAAAAAAAAAAAAAHnuCi+DL1PSmpfk6Ky2y8M5K2cJZZzzzOZjertaa+v6VG0H754j48nBpYShOM4u0ou6Z01tK4qnJybdrPwa0aPg8/kt9luM9XpwqxlRVRLlcGDTeepeNJxpJp+bCx6Z8Rv1Ec46nVCO2Nkc8MTR1cmsCkixTqABEmkiIyus8gSAAAAAAAAAAAAAAAAAAAAA56sd0fJzUqd6m5rg65GUPkf1AtZONn1L0qauvBU2o9focdcy2Oua0wYzjtl4NkUq/xO3LM1pSurdUZFqXzr7gblWWZV8AZSy8cBYC4JMasgFwDWAAAAAAAAAAAAAAAAAAA//Z");
+    background-size: cover;
+}
+.img-preview {
+    width: 256px;
+    height: 256px;
+    position: relative;
+    border: 5px solid #F8F8F8;
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
+    margin-top: 1em;
+    margin-bottom: 1em;    
+}
+
+.img-preview>div {
+    width: 100%;
+    height: 100%;
+    background-size: 256px 256px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+.upload-label{
+    display: inline-block;
+    padding: 12px 30px;
+    background: #39D2B4;
+    color: #fff;
+    font-size: 1em;
+    transition: all .4s;
+    cursor: pointer;
+}
+
+.upload-label:hover{
+    background: #557ca4;
+    color: #19b495;
+}
+
+.loader {
+    border: 8px solid #f3f3f3; /* Light grey */
+    border-top: 8px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+</style>
+</head>
+
+<body>
+	
+	
+    
+    <nav class="navbar navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">Forest Fire Detection</a>
+        </div>
+    </nav>
+    <div class="container">
+        <div id="content" style="margin-top:2em">
+		<div class="container">
+		  <div class="row">
+			<div class="col-sm-6 bd">
+			  <p>Forest fires are a major environmental issue, creating economic and ecological damage while endangering human lives. There are typically about 100,000 wildfires in the United States every year. Over 9 million acres of land have been destroyed due to treacherous wildfires. It is difficult to predict and detect Forest Fire in a sparsely populated forest area and it is more difficult if the prediction is done using ground-based methods like Camera or Video-Based approach. Satellites can be an important source of data prior to and also during the Fire due to its reliability and efficiency. The various real-time forest fire detection and prediction approaches, with the goal of informing the local fire authorities.
+			</p>
+				<img src="./pic1.jpg" style="width:100%;height: auto;">  
+			</div>
+			<div class="col-sm-6">
+				<div>
+					<h4>Upload Video Here To check if there is fire or not</h4>
+			<form action = "http://localhost:5000/" id="upload-file" method="post" enctype="multipart/form-data">
+				<label for="imageUpload" class="upload-label">
+					Choose...
+				</label>
+				<input type="file" name="image" id="imageUpload" accept=".mp4">
+			</form>
+
+			<div class="image-section" style="display:none;">
+
+
+				<div>
+					<button type="button" class="btn btn-info btn-lg " id="btn-predict">Predict!</button>
+				</div>
+			</div>
+
+			<div class="loader" style="display:none;"></div>
+
+			<h3>
+				<span id="result"> </span>
+			</h3>
+
+		</div>
+			</div>
+			 
+		  </div>
+		</div>
+		</div>
+    </div>
+</body>
+<script>
+	$(document).ready(function () {
+    // Init
+    $('.image-section').hide();
+    $('.loader').hide();
+    $('#result').hide();
+
+    // Upload Preview
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#imagePreview').css('background-image', 'url(' + e.target.result + ')');
+                $('#imagePreview').hide();
+                $('#imagePreview').fadeIn(650);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    $("#imageUpload").change(function () {
+        $('.image-section').show();
+        $('#btn-predict').show();
+        $('#result').text('');
+        $('#result').hide();
+        readURL(this);
+    });
+
+    // Predict
+    $('#btn-predict').click(function () {
+        var form_data = new FormData($('#upload-file')[0]);
+
+        // Show loading animation
+        $(this).hide();
+        $('.loader').show();
+
+        // Make prediction by calling api /predict
+        $.ajax({
+            type: 'POST',
+            url: '/predict',
+            data: form_data,
+            contentType: false,
+            cache: false,
+            processData: false,
+            async: true,
+            success: function (data) {
+                // Get and display the result
+                $('.loader').hide();
+                $('#result').fadeIn(600);
+                $('#result').text(' Result:  ' + data);
+                console.log('Success!');
+            },
+        });
+    });
+
+});
+</script>
+</html>
